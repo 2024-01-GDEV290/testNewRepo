@@ -19,7 +19,7 @@ public class FirstPersonController : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
-    public GameObject camera;
+    public GameObject scamera;
     private Rigidbody rb;
 
     void Start()
@@ -54,7 +54,7 @@ public class FirstPersonController : MonoBehaviour
 
         Vector3 movement = new Vector3(moveLR, 0, moveFB);
         transform.Rotate(0, rotX, 0);
-        camera.transform.localRotation = Quaternion.Euler(rotY, 0, 0);
+        scamera.transform.localRotation = Quaternion.Euler(rotY, 0, 0);
 
         movement = transform.rotation * movement;
         transform.position += movement * Time.deltaTime;

@@ -8,7 +8,6 @@ public class PickUp : MonoBehaviour
     public Transform holdPos;
     public float throwForce = 200f;
     public float pickUpRange = 5f;
-    private float rotationSensitivity = 1f; //how fast/slow the object is rotated in relation to mouse movement
     private GameObject heldObj; 
     private Rigidbody heldObjRb; 
     private bool canDrop = true;
