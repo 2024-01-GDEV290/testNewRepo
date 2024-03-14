@@ -11,7 +11,9 @@ public class PickUp : MonoBehaviour
     private GameObject heldObj; 
     private Rigidbody heldObjRb; 
     private bool canDrop = true;
-    private int LayerNumber; 
+    private int LayerNumber;
+
+    public NodeSO NodeSO;
     void Start()
     {
         LayerNumber = LayerMask.NameToLayer("holdLayer"); 
@@ -64,6 +66,7 @@ public class PickUp : MonoBehaviour
             heldObj.layer = LayerNumber; //change the object layer to the holdLayer
             //make sure object doesnt collide with player, it can cause weird bugs
             Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), true);
+            NodeSO.color = pickUpObj.GetComponent<Color>();
         }
     }
     void DropObject()
