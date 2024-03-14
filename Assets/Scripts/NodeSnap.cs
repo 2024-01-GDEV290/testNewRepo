@@ -13,19 +13,17 @@ public class NodeSnap : MonoBehaviour
     private void Start()
     {
         NodeSO.allPlaced = 0;
-        this.GetComponent<Renderer>().material.color = new Color(0, 0, 255);
     }
     // Start is called before the first frame update
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("port") && placed == false)
+        if (other.gameObject.CompareTag("port") && placed == false && this.GetComponent<Renderer>().material.color == other.gameObject.GetComponent<Renderer>().material.color)
         {
             Debug.Log("hit");
             locked = other.transform.position;
             this.transform.position = locked;
-
             this.transform.rotation = new Quaternion(0, 0, 0, 0);
-            this.GetComponent<Renderer>().material.color = new Color(0, 0, 155);
+            //this.GetComponent<Renderer>().material.color = new Color(0, 0, 55);
             this.tag = "placed";
             NodeSO.allPlaced++;
             placed = true;
@@ -37,6 +35,7 @@ public class NodeSnap : MonoBehaviour
         {
             transform.position = locked;
             transform.rotation = new Quaternion(0,0,0,0);
+            //this.GetComponent<Renderer>().material.color = new Color(0, 0, 55);
         }
     }
 }

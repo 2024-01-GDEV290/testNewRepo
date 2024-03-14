@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 
 public class PickUp : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class PickUp : MonoBehaviour
                     if (hit.transform.gameObject.tag == "canPickUp")
                     {
                         PickUpObject(hit.transform.gameObject);
+
                     }
                 }
             }
@@ -59,6 +61,7 @@ public class PickUp : MonoBehaviour
     {
         if (pickUpObj.GetComponent<Rigidbody>()) //make sure the object has a RigidBody
         {
+            NodeSO.color = pickUpObj.GetComponent<Renderer>().material.color;
             heldObj = pickUpObj; //assign heldObj to the object that was hit by the raycast (no longer == null)
             heldObjRb = pickUpObj.GetComponent<Rigidbody>(); //assign Rigidbody
             heldObjRb.isKinematic = true;
@@ -66,7 +69,7 @@ public class PickUp : MonoBehaviour
             heldObj.layer = LayerNumber; //change the object layer to the holdLayer
             //make sure object doesnt collide with player, it can cause weird bugs
             Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), true);
-            NodeSO.color = pickUpObj.GetComponent<Color>();
+            
         }
     }
     void DropObject()
