@@ -14,7 +14,7 @@ public class OpenDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(nodeSO.allPlaced==4)
+        if(nodeSO.allPlaced==1)
         {
             this.gameObject.SetActive(false);
         }
