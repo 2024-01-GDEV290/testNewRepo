@@ -38,7 +38,7 @@ public class PickUp : MonoBehaviour
             {
                 if (canDrop == true)
                 {
-                    StopClipping(); 
+                    StopClipping();
                     DropObject();
                 }
             }
@@ -52,6 +52,10 @@ public class PickUp : MonoBehaviour
                 StopClipping();
                 ThrowObject();
             }
+            if(NodeSO.placed == true)
+            {
+                DropObject();
+            }
 
         }
     }
@@ -59,6 +63,7 @@ public class PickUp : MonoBehaviour
     {
         if (pickUpObj.GetComponent<Rigidbody>()) //make sure the object has a RigidBody
         {
+            NodeSO.placed = false;
             heldObj = pickUpObj; //assign heldObj to the object that was hit by the raycast (no longer == null)
             heldObjRb = pickUpObj.GetComponent<Rigidbody>(); //assign Rigidbody
             heldObjRb.isKinematic = true;
@@ -66,7 +71,12 @@ public class PickUp : MonoBehaviour
             heldObj.layer = LayerNumber; //change the object layer to the holdLayer
             //make sure object doesnt collide with player, it can cause weird bugs
             Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), true);
-            NodeSO.color = pickUpObj.GetComponent<Color>();
+            NodeSO.color = heldObj.GetComponent<Renderer>().material.color;
+            if (NodeSO.placed == true)
+            {
+                DropObject();
+            }
+
         }
     }
     void DropObject()

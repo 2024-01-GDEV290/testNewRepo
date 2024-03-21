@@ -8,4 +8,5 @@ public class NodeSO : ScriptableObject
 {
     public Color color;
     public int allPlaced;
+    public bool placed = false;
 }
