@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class PickUp : MonoBehaviour
@@ -9,7 +11,9 @@ public class PickUp : MonoBehaviour
     public float throwForce = 200f;
     public float pickUpRange = 5f;
     private GameObject heldObj; 
-    private Rigidbody heldObjRb; 
+    private Rigidbody heldObjRb;
+    public TextMeshProUGUI pickUpText;
+    public TextMeshProUGUI dropText;
     private bool canDrop = true;
     private int LayerNumber;
 
@@ -20,6 +24,18 @@ public class PickUp : MonoBehaviour
     }
     void Update()
     {
+        dropText.gameObject.SetActive(false);
+        pickUpText.gameObject.SetActive(false);
+        RaycastHit texthit;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out texthit, pickUpRange))
+        {
+            if (texthit.transform.gameObject.tag == "canPickUp")
+            {
+                pickUpText.gameObject.SetActive(true);
+            }
+        }
+
+
         if (Input.GetKeyDown(KeyCode.E)) 
         {
 
@@ -45,16 +61,20 @@ public class PickUp : MonoBehaviour
         }
         if (heldObj != null)
         {
+            pickUpText.gameObject.SetActive(false);
+            dropText.gameObject.SetActive(true);
             MoveObject(); 
 
             if (Input.GetKeyDown(KeyCode.Mouse0) && canDrop == true) 
             {
                 StopClipping();
                 ThrowObject();
+                
             }
             if(NodeSO.placed == true)
             {
                 DropObject();
+                
             }
 
         }
