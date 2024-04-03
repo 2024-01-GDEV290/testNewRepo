@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e30dea5db1ae6409adde39d06ec4ac, type: 3}
   m_Name: ColorCode
   m_EditorClassIdentifier: 
-  color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 0}
+  color: {r: 0, g: 0, b: 1, a: 1}
+  allPlaced: 1
+  placed: 1
